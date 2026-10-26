@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "OpenOCD: flash",
+			"command": "openocd",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"args": [
+				"-f",
+				"openocd.cfg",
+				"-c",
+				"program build/Debug/COD_H7_Template_Clion.elf verify reset exit"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"dependsOn": "CMake: build",
+			"detail": "编译后烧录到 STM32（CMSIS-DAP）"
+		},
+		{
+			"type": "cmake",
+			"label": "CMake: build",
+			"command": "build",
+			"targets": [
+				"all"
+			],
+			"preset": "${command:cmake.activeBuildPresetName}",
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "CMake 编译任务"
+		}
+	]
+}
